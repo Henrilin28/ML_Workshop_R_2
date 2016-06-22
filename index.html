@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shrinkage Method</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Shrinkage Method">
+  <meta name="author" content="Henrilin">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Shrinkage Method</h1>
+    <h2>Ridge and Lasso</h2>
+    <p>Henrilin<br/>剩13天的替代役</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Outline</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Why Shrinkage ? </li>
+<li>Ridge Regression VS Lasso</li>
+<li>Variable Selection</li>
+<li>A Speicial Case </li>
+<li>Baesian Interpretation </li>
+<li>Selecting the Tuning Parameter</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Why Shrinkage ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Shrinkage is a general technique to improve a least-squares estimator which consists in reducing the variance by adding constraints on the value of coefficients</h3>
+
+<ul>
+<li>improve fitting </li>
+<li>reduce variance</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Ridge Regression</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/Ridge%20Regression_formula.png" alt=""></p>
+
+<p>where \(\lambda \geq 0\) is a <strong>tunning parameter</strong></p>
+
+<p>\(\lambda \sum_{j=1}^{p}\beta _{j}^{2}\) -&gt; <strong>shrinkage penalty</strong></p>
+
+<p><img src="assets/img/case_ridge.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Ridge Regression (Continue.)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/ridge_precision.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Lasso</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3><strong>(Least absolute shrinkage and selection operator, Tibshirani(1996))</strong></h3>
+
+<p><img src="assets/img/lasso_formula.png" alt=""></p>
+
+<p>The \(l1\) norm of a coefficient vector \(\beta\) is given by \(\left \| \beta  \right \| = \sum \left | \beta_{j} \right |\)</p>
+
+<h2><img src="assets/img/case_lasso.png" alt=""></h2>
+
+<h2>Connection between Ridge and Lasso</h2>
+
+<p>Here \(I(\beta_{j} \neq 0)\) is an indicator variable: it takes on a value of 1 if \(\beta \neq 0\), and equals zero otherwise.</p>
+
+<h2>This equation is equal to best subset selection. However, it is computationally infeasible when \(p\) is large.</h2>
+
+<h2>Variable Selection</h2>
+
+<p><img src="assets/img/variable.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>A Speicial Case</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>\(n=p\) / \(X\), a diagonal matrix with 1’s on the diagonal and 0’s in all off-diagonal elements.</h3>
+
+<p><img src="assets/img/specialcase.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Baesian Interpretation</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>A Bayesian viewpoint for regression assumes that the coefficient vector \(\beta\) has some prior distribution, say \(p(\beta)\), where \(\beta = (\beta_{0},\beta_{1},...,\beta_{p})^{T}\) . The likelihood of the data can be written as f(Y |X,β), where \(X = (X_{1}, . . . , X_{p})\).
+\[P(\beta|X,Y) \propto f(Y|X,\beta)p(\beta|X) = f(Y|X,\beta)p(\beta)\]</p>
+
+<p>assume the usual linear model,</p>
+
+<p>\[ Y = \beta_{0} + X_{1}\beta_{1} + ... + X_{p}\beta_{p} + \varepsilon \]</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Baesian Interpretation (Continue.)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/posterior.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Selecting the Tuning Parameter</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/img/select_tp.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Lab</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>load library and use <strong>model.matrix()</strong> to automatically transforms any qualitative variables into dummy variables.</p>
+
+<pre><code class="r">library(ISLR);library(glmnet)
+Hitters=na.omit(Hitters)
+x=model.matrix(Salary~.,Hitters)[,-1]
+y=Hitters$Salary
+grid=10^seq(10,-2,length=100)
+ridge.mod=glmnet(x,y,alpha=0,lambda=grid)
+dim(coef(ridge.mod))
+</code></pre>
+
+<pre><code>## [1]  20 100
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ridge.mod$lambda [50]
+</code></pre>
+
+<pre><code>## [1] 11497.57
+</code></pre>
+
+<pre><code class="r">coef(ridge.mod)[,50]
+</code></pre>
+
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
+## 407.356050200   0.036957182   0.138180344   0.524629976   0.230701523 
+##           RBI         Walks         Years        CAtBat         CHits 
+##   0.239841459   0.289618741   1.107702929   0.003131815   0.011653637 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##   0.087545670   0.023379882   0.024138320   0.025015421   0.085028114 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+##  -6.215440973   0.016482577   0.002612988  -0.020502690   0.301433531
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ridge.mod$lambda [60]
+</code></pre>
+
+<pre><code>## [1] 705.4802
+</code></pre>
+
+<pre><code class="r">coef(ridge.mod)[,60]
+</code></pre>
+
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##  54.32519950   0.11211115   0.65622409   1.17980910   0.93769713 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.84718546   1.31987948   2.59640425   0.01083413   0.04674557 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.33777318   0.09355528   0.09780402   0.07189612  13.68370191 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -54.65877750   0.11852289   0.01606037  -0.70358655   8.61181213
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">predict(ridge.mod,s=50,type=&quot;coefficients&quot;)[1:20,]
+</code></pre>
+
+<pre><code>##   (Intercept)         AtBat          Hits         HmRun          Runs 
+##  4.876610e+01 -3.580999e-01  1.969359e+00 -1.278248e+00  1.145892e+00 
+##           RBI         Walks         Years        CAtBat         CHits 
+##  8.038292e-01  2.716186e+00 -6.218319e+00  5.447837e-03  1.064895e-01 
+##        CHmRun         CRuns          CRBI        CWalks       LeagueN 
+##  6.244860e-01  2.214985e-01  2.186914e-01 -1.500245e-01  4.592589e+01 
+##     DivisionW       PutOuts       Assists        Errors    NewLeagueN 
+## -1.182011e+02  2.502322e-01  1.215665e-01 -3.278600e+00 -9.496680e+00
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">set.seed (1)
+train=sample(1:nrow(x), nrow(x)/2)
+test=(-train)
+y.test=y[test]
+ridge.mod=glmnet(x[train,],y[train],alpha=0,lambda=grid, thresh=1e-12)
+ridge.pred=predict(ridge.mod,s=4,newx=x[test,])
+mean((ridge.pred-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 101036.8
+</code></pre>
+
+<pre><code class="r">mean((mean(y[train])-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 193253.1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ridge.pred=predict(ridge.mod, s = 1e10,newx = x[test,])
+mean((ridge.pred-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 193253.1
+</code></pre>
+
+<pre><code class="r">ridge.pred=predict(ridge.mod, s = 0,newx = x[test,],exact = T)
+</code></pre>
+
+<pre><code>## Error: problem with predict.glmnet() or coef.glmnet(): unable to refit the glmnet object to compute exact coefficients; please supply original data by name, such as x and y, plus any weights, offsets etc.
+</code></pre>
+
+<pre><code class="r">mean((ridge.pred-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 193253.1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">lm(y~x,subset = train)
+</code></pre>
+
+<pre><code>## 
+## Call:
+## lm(formula = y ~ x, subset = train)
+## 
+## Coefficients:
+## (Intercept)       xAtBat        xHits       xHmRun        xRuns  
+##   299.42849     -2.54027      8.36682     11.64512     -9.09923  
+##        xRBI       xWalks       xYears      xCAtBat       xCHits  
+##     2.44105      9.23440    -22.93673     -0.18154     -0.11598  
+##     xCHmRun       xCRuns        xCRBI      xCWalks     xLeagueN  
+##    -1.33888      3.32838      0.07536     -1.07841     59.76065  
+##  xDivisionW     xPutOuts     xAssists      xErrors  xNewLeagueN  
+##   -98.86233      0.34087      0.34165     -0.64207     -0.67442
+</code></pre>
+
+<pre><code class="r">predict(ridge.mod, s = 0, exact = T, type = &quot;coeffcients&quot;)[1:20,]
+</code></pre>
+
+<pre><code>## Error in match.arg(type): &#39;arg&#39; should be one of &quot;link&quot;, &quot;response&quot;, &quot;coefficients&quot;, &quot;nonzero&quot;, &quot;class&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">set.seed(1)
+cv.out = cv.glmnet(x[train,],y[train],alpha=0)
+plot(cv.out)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-8-1.png" title="plot of chunk unnamed-chunk-8" alt="plot of chunk unnamed-chunk-8" style="display: block; margin: auto;" /></p>
+
+<pre><code class="r">cv.out$lambda.min
+</code></pre>
+
+<pre><code>## [1] 211.7416
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">ridge.pred=predict(ridge.mod, s = cv.out$lambda.min,newx = x[test,])
+mean((ridge.pred-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 96015.51
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Lab (Ridge Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">out = glmnet(x,y,alpha=0)
+predict(out,type = &quot;coefficients&quot;,s=cv.out$lambda.min)[1:20,]
+</code></pre>
+
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##   9.88487157   0.03143991   1.00882875   0.13927624   1.11320781 
+##          RBI        Walks        Years       CAtBat        CHits 
+##   0.87318990   1.80410229   0.13074381   0.01113978   0.06489843 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##   0.45158546   0.12900049   0.13737712   0.02908572  27.18227535 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -91.63411299   0.19149252   0.04254536  -1.81244470   7.21208390
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Lab (Lasso Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">lasso.mod=glmnet(x[train ,],y[train],alpha=1,lambda=grid)
+plot(lasso.mod)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-11-1.png" title="plot of chunk unnamed-chunk-11" alt="plot of chunk unnamed-chunk-11" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Lab (Lasso Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">set.seed (1)
+cv.out=cv.glmnet(x[train ,],y[train],alpha=1)
+plot(cv.out)
+</code></pre>
+
+<p><img src="assets/fig/unnamed-chunk-12-1.png" title="plot of chunk unnamed-chunk-12" alt="plot of chunk unnamed-chunk-12" style="display: block; margin: auto;" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>Lab (Lasso Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">bestlam=cv.out$lambda.min
+lasso.pred=predict(lasso.mod,s=bestlam ,newx=x[test,])
+mean((lasso.pred-y.test)^2)
+</code></pre>
+
+<pre><code>## [1] 100743.4
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>Lab (Lasso Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">out=glmnet(x,y,alpha=1,lambda=grid)
+lasso.coef=predict(out,type=&quot;coefficients&quot;,s=bestlam)[1:20,]
+lasso.coef
+</code></pre>
+
+<pre><code>##  (Intercept)        AtBat         Hits        HmRun         Runs 
+##   18.5394844    0.0000000    1.8735390    0.0000000    0.0000000 
+##          RBI        Walks        Years       CAtBat        CHits 
+##    0.0000000    2.2178444    0.0000000    0.0000000    0.0000000 
+##       CHmRun        CRuns         CRBI       CWalks      LeagueN 
+##    0.0000000    0.2071252    0.4130132    0.0000000    3.2666677 
+##    DivisionW      PutOuts      Assists       Errors   NewLeagueN 
+## -103.4845458    0.2204284    0.0000000    0.0000000    0.0000000
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Lab (Lasso Regression)</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">lasso.coef[lasso.coef!=0]
+</code></pre>
+
+<pre><code>##  (Intercept)         Hits        Walks        CRuns         CRBI 
+##   18.5394844    1.8735390    2.2178444    0.2071252    0.4130132 
+##      LeagueN    DivisionW      PutOuts 
+##    3.2666677 -103.4845458    0.2204284
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Outline'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Why Shrinkage ?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Ridge Regression'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Ridge Regression (Continue.)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Lasso'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='A Speicial Case'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Baesian Interpretation'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Baesian Interpretation (Continue.)'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Selecting the Tuning Parameter'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Lab'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Lab (Ridge Regression)'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Lab (Ridge Regression)'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Lab (Ridge Regression)'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Lab (Ridge Regression)'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Lab (Ridge Regression)'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Lab (Ridge Regression)'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Lab (Ridge Regression)'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Lab (Ridge Regression)'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Lab (Ridge Regression)'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Lab (Lasso Regression)'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Lab (Lasso Regression)'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Lab (Lasso Regression)'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='Lab (Lasso Regression)'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='Lab (Lasso Regression)'>
+         24
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/opencpu-0.5.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
